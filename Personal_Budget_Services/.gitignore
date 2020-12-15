@@ -1,0 +1,4 @@
+.env
+budgetData.json
+/config
+/node_modules

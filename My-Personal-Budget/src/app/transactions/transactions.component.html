@@ -1,0 +1,146 @@
+<div id="content-wrapper">
+  <div id="content">
+    <div class="container-fluid">
+      <div class="d-sm-flex justify-content-between align-items-center mb-4">
+        <h1 class="text-dark text-bold mb-0">Transactions</h1>
+      </div>
+
+      <div class="row" *ngIf="showform">
+        <div class="col-md-12">
+          <div class="card shadow mb-4 m-2">
+            <div class="card-body">
+              <form class="form-horizontal" action="/action_page.php">
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="email"
+                    >Category:</label
+                  >
+                  <div class="">
+                    <select
+                      type="email"
+                      class="form-control"
+                      id="Category"
+                      placeholder="Enter category"
+                      name="Category"
+                      [(ngModel)]="Category"
+                    >
+                      <option *ngFor="let order of categories" [value]="order">
+                        {{ order }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2">Date:</label>
+                  <div class="col-sm-10">
+                    <mat-form-field>
+                      <input
+                        matInput
+                        [matDatepicker]="picker1"
+                        autocomplete="off"
+                        [(ngModel)]="Date"
+                        name="Date"
+                      />
+                      <mat-datepicker-toggle
+                        matSuffix
+                        [for]="picker1"
+                      ></mat-datepicker-toggle>
+                      <mat-datepicker #picker1 color="primary"></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2">Details:</label>
+                  <div class="col-sm-10">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="Details"
+                      placeholder="Enter Details"
+                      name="Details"
+                      [(ngModel)]="Details"
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2">Amount Spent:</label>
+                  <div class="col-sm-10">
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="Spent"
+                      placeholder="Enter Amount Spent"
+                      name="Spent"
+                      [(ngModel)]="Spent"
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <button
+                      type="button"
+                      class="btn btn-secondary btn-lg"
+                      data-toggle="modal"
+                      data-target="#expenseModal"
+                      (click)="onAddTransaction(Category, Date, Details, Spent)"
+                    >
+                      Add Expense
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="!showform">
+        <div class="col-md-12">
+          <div class="card shadow mb-4 m-2">
+            <div class="card-body">
+              <div class="align-items-center no-gutters">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th *ngFor="let item of headers">{{ item }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      *ngFor="
+                        let row of this.dataServices.transactions;
+                        let i = index
+                      "
+                    >
+                      <td>{{ row.Category }}</td>
+                      <td>{{ row.Date }}</td>
+                      <td>{{ row.Details }}</td>
+                      <td>{{ row.Spent }}</td>
+                      <td>
+                        <a
+                          class="add"
+                          title="Delete"
+                          data-toggle="tooltip"
+                          (click)="OnDelete(i, row.Category,row.Spent)"
+                          ><i class="fa fa-trash"></i
+                        ></a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="m-4" style="text-align: right">
+        <button
+          class="mdc-fab"
+          aria-label="Favorite"
+          (click)="changeCards('form')"
+        >
+          <div class="mdc-fab__ripple"></div>
+          <span class="mdc-fab__icon material-icons">add</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
