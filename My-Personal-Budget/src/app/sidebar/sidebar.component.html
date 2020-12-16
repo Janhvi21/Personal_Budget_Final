@@ -1,51 +1,35 @@
-<div id="wrapper">
-  <nav
-    class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0"
-  >
-    <div class="container-fluid d-flex">
-      <a
-        class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
-        href="#"
-        style="padding-left: 0px !important"
-      >
-        <div class="sidebar-brand-text">Personal Budget</div>
-      </a>
-      <hr class="sidebar-divider my-0" />
-      <ul class="nav navbar-nav text-light" id="accordionSidebar">
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            (click)="onChangeMenu('Dashboard')"
-            style="cursor: pointer"
-            ><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a
-          >
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            (click)="onChangeMenu('Transactions')"
-            style="cursor: pointer"
-            ><i class="fas fa-user"></i><span>Transactions</span></a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" (click)="OnLogout()" style="cursor: pointer"
-            ><i class="fas fa-user-circle"></i><span>Log Out</span></a
-          >
-        </li>
-      </ul>
-      <div class="text-center d-none d-md-inline">
-        <!--<button
-          class="btn rounded-circle border-0"
-          id="sidebarToggle"
-          type="button"
-        ></button>-->
-      </div>
-    </div>
-  </nav>
-  <div style="width: -webkit-fill-available">
-    <app-dashboard *ngIf="selectedMenu == 'Dashboard'"></app-dashboard>
+<nav class="navbar navbar-expand-md bg-primary navbar-dark">
+  <!-- Brand/logo -->
+  <a class="navbar-brand" href="#">Personal Budget</a>
 
-    <app-transactions *ngIf="selectedMenu == 'Transactions'"></app-transactions>
-  </div>
+  <!-- Links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        (click)="onChangeMenu('Dashboard')"
+        style="cursor: pointer"
+        >Dashboard</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        href="#"
+        (click)="onChangeMenu('Transactions')"
+        style="cursor: pointer"
+        >Transactions</a
+      >
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#" (click)="OnLogout()" style="cursor: pointer"
+        >Log Out</a
+      >
+    </li>
+  </ul>
+</nav>
+<div style="width: -webkit-fill-available">
+  <app-dashboard *ngIf="selectedMenu == 'Dashboard'"></app-dashboard>
+
+  <app-transactions *ngIf="selectedMenu == 'Transactions'"></app-transactions>
 </div>
