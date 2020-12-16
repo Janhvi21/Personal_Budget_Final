@@ -68,8 +68,8 @@ export class DashboardComponent implements AfterViewInit, OnInit, OnDestroy {
       isEmptyObject(this.dataService.dataSource)
     ) {
       this.dataService.getDataFromFirebase();
-      this.showRefreshToken();
-      this.callTimer();
+      //this.showRefreshToken();
+      //this.callTimer();
     }
 
     setTimeout(() => {
@@ -88,22 +88,26 @@ export class DashboardComponent implements AfterViewInit, OnInit, OnDestroy {
     );
     clearTimeout(this.timeout);
     clearTimeout(this.refreshmodal);
-    this.showRefreshToken();
-    this.callTimer();
+    //this.showRefreshToken();
+    //this.callTimer();
   }
-  showRefreshToken(): void {
+  /*showRefreshToken(): void {
+
     this.refreshmodal = setTimeout(() => {
+      alert('showRefreshToken');
       document.getElementById('refresh').click();
     }, 50000);
   }
   callTimer(): void {
+
     this.timeout = setTimeout(() => {
+      alert('callTimer');
       clearTimeout(this.timeout);
       document.getElementById('closeRefreshModal').click();
       localStorage.clear();
       this.loginServiceService.logout();
     }, 60000);
-  }
+  }*/
   calculateTotalBudget(): void {
     this.totalSpent = 0;
     this.totalSaving = 0;

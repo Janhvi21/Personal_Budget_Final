@@ -3,13 +3,17 @@ const bodyParser = require("body-parser");
 const cors = require('cors');
 const setFirebase = require("./firebase/setData");
 const getFirebase = require("./firebase/getData");
+const compression = require('compression');
 
 const app = express();
+app.use(compression());
 const port = 3000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+
+
 
 
 const admin = require('./firebase-admin/admin');
@@ -23,6 +27,11 @@ app.listen(port, () => {
 });
 app.get("/budget/", function (req, res) {
   res.send("Budget is working");
+});
+app.get("/allUsers", function (req, res) {
+  getFirebase.getallUsers(req, function (err, data) {
+    res.send(data);
+  })
 });
 
 app.post("/createNewUser/", function (req, res) {

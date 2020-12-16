@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginServiceService } from '../login-service.service';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,7 +9,7 @@ import { LoginServiceService } from '../login-service.service';
 })
 export class SidebarComponent implements OnInit {
   selectedMenu: string = 'Dashboard';
-  constructor(public loginServiceService: LoginServiceService) {}
+  constructor(public loginServiceService: LoginServiceService,public dataService:DataService) {}
 
   ngOnInit(): void {}
 

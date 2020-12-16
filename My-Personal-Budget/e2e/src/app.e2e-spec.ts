@@ -1,5 +1,5 @@
 import { AppPage } from './app.po';
-import { browser, logging } from 'protractor';
+import { browser, logging, element } from 'protractor';
 
 describe('workspace-project App', () => {
   let page: AppPage;
@@ -8,9 +8,23 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display welcome message, login button, signup button', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('PersonalBudget app is running!');
+    expect(page.getTitleText()).toEqual('Personal Budget');
+  });
+  it('should display login button', () => {
+    page.navigateTo();
+    expect(page.getLoginButton()).toEqual('Login');
+  });
+  it('should display signup button', () => {
+    page.navigateTo();
+    expect(page.getSignupButton()).toEqual('Sign Up');
+  });
+  it('should open login page on login button click', () => {
+    page.navigateTo();
+    expect(page.getLoginButton()).toEqual('Login');
+    page.clickLogin();
+    expect(page.getloginform()).toEqual('Login');
   });
 
   afterEach(async () => {
