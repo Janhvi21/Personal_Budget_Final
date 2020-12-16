@@ -4,6 +4,7 @@ import { Data } from '@angular/router';
 import 'rxjs';
 import { AppModule } from './app.module';
 import { stringify } from '@angular/compiler/src/util';
+import { environment } from '../environments/environment';
 
 export class Element {
   value: '';
@@ -91,7 +92,7 @@ export class DataService {
     };
     const promise = new Promise<void>((resolve, reject) => {
       this.http
-        .get('http://localhost:3000/getAllData', { params })
+        .get(environment.URL+':3000/getAllData', { params })
         .toPromise()
         .then((res: any) => {
           this.months = [];
@@ -134,7 +135,7 @@ export class DataService {
     };
     const promise = new Promise<void>((resolve, reject) => {
       this.http
-        .get('http://localhost:3000/insertCategory', { params })
+        .get(environment.URL+':3000/insertCategory', { params })
         .toPromise()
         .then((res: any) => {
           resolve();
@@ -152,7 +153,7 @@ export class DataService {
     };
     const promise = new Promise<void>((resolve, reject) => {
       this.http
-        .get('http://localhost:3000/deleteCategory', { params })
+        .get(environment.URL+':3000/deleteCategory', { params })
         .toPromise()
         .then((res: any) => {
           resolve();
@@ -177,7 +178,7 @@ export class DataService {
     };
     const promise = new Promise<void>((resolve, reject) => {
       this.http
-        .get('http://localhost:3000/insertTransaction', { params })
+        .get(environment.URL+':3000/insertTransaction', { params })
         .toPromise()
         .then((res: any) => {
           resolve();
@@ -196,7 +197,7 @@ export class DataService {
     };
     const promise = new Promise<void>((resolve, reject) => {
       this.http
-        .get('http://localhost:3000/deleteTransactions', { params })
+        .get(environment.URL+':3000/deleteTransactions', { params })
         .toPromise()
         .then((res: any) => {
           resolve();
@@ -214,7 +215,7 @@ export class DataService {
     };
     const promise = new Promise<void>((resolve, reject) => {
       this.http
-        .get('http://localhost:3000/addMonthtoDB', { params })
+        .get(environment.URL+':3000/addMonthtoDB', { params })
         .toPromise()
         .then((res: any) => {
           resolve();

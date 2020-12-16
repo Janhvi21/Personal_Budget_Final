@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import firebase from 'firebase';
 import { DataService } from './data.service';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -39,7 +40,7 @@ export class LoginServiceService {
           token: currentToken,
         };
         this.http
-          .get('http://localhost:3000/verifyUser', { params })
+          .get(environment.URL+':3000/verifyUser', { params })
           .toPromise()
           .then((res2: any) => {
             this.isLoggedIn = true;
@@ -59,7 +60,7 @@ export class LoginServiceService {
   async signup(name: string, email: string, password: string) {
     const promise = new Promise<void>((resolve, reject) => {
       this.http
-        .post('http://localhost:3000/createNewUser', {
+        .post(environment.URL+':3000/createNewUser', {
           username: name,
           password: password.trim(),
           email: email.trim(),
