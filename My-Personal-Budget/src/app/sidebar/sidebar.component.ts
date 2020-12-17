@@ -29,7 +29,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
   callTimer(): void {
     document.getElementById('closeRefreshModal').click();
-    //this.loginServiceService.logout();
+    this.loginServiceService.logout();
     clearTimeout(this.intervalId);
     clearTimeout(this.refreshmodal);
   }
