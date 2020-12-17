@@ -1,167 +1,170 @@
-<div class="d-flex flex-column content" id="content-wrapper">
-  <div class="" id="content">
-    <div class="container-fluid" style="padding: 15px">
-      <div class="d-sm-flex justify-content-between align-items-center mb-4">
-        <h3 class="title py-2">
-          Dashboard
-        </h3>
-      </div>
-      <div class="row">
-        <div class="col-md-4 col-xl-3 mb-4">
-          <div class="card shadow border-left-primary py-2">
-            <div class="card-body">
-              <div class="row align-items-center no-gutters">
-                <div class="col mr-2">
-                  <div
-                    class="text-uppercase text-primary font-weight-bold text-xs mb-1"
-                  >
-                    <span>Total Budget</span>
-                  </div>
-                  <div class="text-dark font-weight-bold h5 mb-0">
-                    <span>${{ totalBudget }}</span>
-                  </div>
-                </div>
-                <div class="col-auto">
-                  <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                </div>
-              </div>
-            </div>
-          </div>
+<div class="box">
+  <div class="d-flex flex-column content" id="content-wrapper">
+    <div class="" id="content">
+      <div class="container-fluid" style="padding: 15px">
+        <div class="d-sm-flex justify-content-between align-items-center mb-4">
+          <h3 class="title py-2">Dashboard</h3>
         </div>
-        <div class="col-md-4 col-xl-3 mb-4">
-          <div class="card shadow border-left-success py-2">
-            <div class="card-body">
-              <div class="row align-items-center no-gutters">
-                <div class="col mr-2">
-                  <div
-                    class="text-uppercase text-success font-weight-bold text-xs mb-1"
-                  >
-                    <span>Total Amount Spent</span>
-                  </div>
-                  <div class="text-dark font-weight-bold h5 mb-0">
-                    <span>${{ totalSpent }}</span>
-                  </div>
-                </div>
-                <div class="col-auto">
-                  <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-xl-3 mb-4">
-          <div class="card shadow border-left-info py-2">
-            <div class="card-body">
-              <div class="row align-items-center no-gutters">
-                <div class="col mr-2">
-                  <div
-                    class="text-uppercase text-info font-weight-bold text-xs mb-1"
-                  >
-                    <span>Total Amount Remaining</span>
-                  </div>
-                  <div class="text-dark font-weight-bold h5 mb-0">
-                    <span>${{ totalSaving }}</span>
-                  </div>
-                </div>
-                <div class="col-auto">
-                  <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-xl-3 mb-4">
-          <div class="card shadow border-left-info py-2">
-            <div class="card-body">
-              <div class="row align-items-center no-gutters">
-                <div class="col mr-2">
-                  <div
-                    class="text-uppercase text-info font-weight-bold text-xs mb-1"
-                  ></div>
-                  <div class="text-dark font-weight-bold h5 mb-0 py-1">
-                    <select
-                      type="text"
-                      class="form-control"
-                      id="Category"
-                      placeholder="Enter category"
-                      name="month"
-                      [(ngModel)]="month"
-                      (change)="onChangeMonth($event.target.value)"
+        <div class="row">
+          <div class="col-md-4 col-xl-3 mb-4">
+            <div class="card shadow border-left-primary py-2">
+              <div class="card-body">
+                <div class="row align-items-center no-gutters">
+                  <div class="col mr-2">
+                    <div
+                      class="text-uppercase text-primary font-weight-bold text-xs mb-1"
                     >
-                      <option
-                        *ngFor="let order of dataService.months"
-                        [value]="order"
-                        [attr.selected]="true"
-                      >
-                        {{ order }}
-                      </option>
-                    </select>
+                      <span>Total Budget</span>
+                    </div>
+                    <div class="text-dark font-weight-bold h5 mb-0">
+                      <span>${{ totalBudget }}</span>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
                   </div>
                 </div>
-                <div class="col-auto">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-xl-3 mb-4">
+            <div class="card shadow border-left-success py-2">
+              <div class="card-body">
+                <div class="row align-items-center no-gutters">
+                  <div class="col mr-2">
+                    <div
+                      class="text-uppercase text-success font-weight-bold text-xs mb-1"
+                    >
+                      <span>Total Amount Spent</span>
+                    </div>
+                    <div class="text-dark font-weight-bold h5 mb-0">
+                      <span>${{ totalSpent }}</span>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-xl-3 mb-4">
+            <div class="card shadow border-left-info py-2">
+              <div class="card-body">
+                <div class="row align-items-center no-gutters">
+                  <div class="col mr-2">
+                    <div
+                      class="text-uppercase text-info font-weight-bold text-xs mb-1"
+                    >
+                      <span>Total Amount Remaining</span>
+                    </div>
+                    <div class="text-dark font-weight-bold h5 mb-0">
+                      <span>${{ totalSaving }}</span>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-xl-3 mb-4">
+            <div class="card shadow border-left-info py-2">
+              <div class="card-body">
+                <div class="row align-items-center no-gutters">
+                  <div class="col mr-2">
+                    <div
+                      class="text-uppercase text-info font-weight-bold text-xs mb-1"
+                    ></div>
+                    <div class="text-dark font-weight-bold h5 mb-0 py-1">
+                      <select
+                        type="text"
+                        class="form-control"
+                        id="Category"
+                        placeholder="Enter category"
+                        name="month"
+                        [(ngModel)]="month"
+                        (change)="onChangeMonth($event.target.value)"
+                      >
+                        <option
+                          *ngFor="let order of dataService.months"
+                          [value]="order"
+                          [attr.selected]="true"
+                        >
+                          {{ order }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <button
+                      class="mdc-fab mdc-fab--mini"
+                      aria-label="Favorite"
+                      data-toggle="modal"
+                      data-target="#monthModel"
+                    >
+                      <div class="mdc-fab__ripple"></div>
+                      <span class="mdc-fab__icon material-icons">add</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-7 col-xl-6">
+            <div class="card shadow mb-4">
+              <div
+                class="card-header d-flex justify-content-between align-items-center"
+              >
+                <h3 class="text-primary font-weight-bold m-0">
+                  Spent amount vs budget
+                </h3>
+              </div>
+              <div class="card-body">
+                <div>
+                  <canvas id="barChart" style="padding: 40px"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-xl-6">
+            <div class="card shadow mb-4">
+              <div
+                class="card-header d-flex justify-content-between align-items-center"
+              >
+                <h3 class="text-primary font-weight-bold m-0">
+                  Planned Budget
+                </h3>
+                <div class="text-center small">
                   <button
-                    class="mdc-fab mdc-fab--mini"
-                    aria-label="Favorite"
+                    type="button"
+                    class="btn btn-primary"
                     data-toggle="modal"
-                    data-target="#monthModel"
+                    data-target="#myModal"
                   >
-                    <div class="mdc-fab__ripple"></div>
-                    <span class="mdc-fab__icon material-icons">add</span>
+                    Edit Budget
                   </button>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-7 col-xl-6">
-          <div class="card shadow mb-4">
-            <div
-              class="card-header d-flex justify-content-between align-items-center"
-            >
-              <h3 class="text-primary font-weight-bold m-0">
-                Spent amount vs budget
-              </h3>
-            </div>
-            <div class="card-body">
-              <div>
-                <canvas id="barChart" style="padding: 40px"></canvas>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 col-xl-6">
-          <div class="card shadow mb-4">
-            <div
-              class="card-header d-flex justify-content-between align-items-center"
-            >
-              <h3 class="text-primary font-weight-bold m-0">Planned Budget</h3>
-              <div class="text-center small">
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  data-toggle="modal"
-                  data-target="#myModal"
-                >
-                  Edit Budget
-                </button>
-              </div>
-            </div>
-            <div class="card-body">
-              <div>
-                <canvas id="myChart"></canvas>
-              </div>
+              <div class="card-body">
+                <div>
+                  <canvas id="myChart"></canvas>
+                </div>
 
-              <!-- Modal -->
+                <!-- Modal -->
+              </div>
             </div>
           </div>
+          <div class="col-lg-5 col-xl-4"></div>
         </div>
-        <div class="col-lg-5 col-xl-4"></div>
       </div>
     </div>
   </div>
 </div>
+
 <app-budget-modal
   [budget]="budget"
   (childEvent)="reload($event)"
