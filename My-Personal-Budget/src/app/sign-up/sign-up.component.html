@@ -1,82 +1,85 @@
 <div class="homepage">
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-6 col-lg-6 col-xl-6">
-      <div class="card shadow-lg o-hidden border-0 my-5">
-        <div class="card-body p-0">
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="p-5">
-                <div class="text-center">
-                  <h4 class="text-dark mb-4">Create an Account!</h4>
-                </div>
-                <form class="user">
-                  <div class="form-group row">
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                      <input
-                        class="form-control form-control-user"
-                        type="text"
-                        id="exampleFirstName"
-                        placeholder="First Name"
-                        name="first_name"
-                        [(ngModel)]="firstName"
-                      />
-                    </div>
-                    <div class="col-sm-6">
-                      <input
-                        class="form-control form-control-user"
-                        type="text"
-                        id="exampleFirstName"
-                        placeholder="Last Name"
-                        name="last_name"
-                        [(ngModel)]="lastName"
-                      />
-                    </div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-6 col-xl-6">
+        <div class="card shadow-lg o-hidden border-0 my-5">
+          <div class="card-body p-0">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="p-5">
+                  <div class="text-center">
+                    <h1 class="display-1 text-white text-bold mb-4">Create an Account!</h1>
                   </div>
-                  <div class="form-group">
-                    <input
-                      class="form-control form-control-user"
-                      type="email"
-                      id="InputEmail"
-                      aria-describedby="emailHelp"
-                      placeholder="Email Address"
-                      name="email"
-                      [(ngModel)] = "Email"
-                    />
-                  </div>
-                  <div class="form-group row">
-                    <div class="col-sm-6 mb-3 mb-sm-0">
+                  <form class="user">
+                    <div class="form-group row">
+                      <div class="col-sm-6 mb-3 mb-sm-0">
+                        <input
+                          class="form-control form-control-user"
+                          type="text"
+                          id="exampleFirstName"
+                          placeholder="First Name"
+                          name="first_name"
+                          [(ngModel)]="firstName"
+                        />
+                      </div>
+                      <div class="col-sm-6">
+                        <input
+                          class="form-control form-control-user"
+                          type="text"
+                          id="exampleFirstName"
+                          placeholder="Last Name"
+                          name="last_name"
+                          [(ngModel)]="lastName"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group">
                       <input
                         class="form-control form-control-user"
-                        type="password"
-                        id="PasswordInput"
-                        placeholder="Password"
-                        name="password"
-                        [(ngModel)] = "Password"
+                        type="email"
+                        id="InputEmail"
+                        aria-describedby="emailHelp"
+                        placeholder="Email Address"
+                        name="email"
+                        [(ngModel)]="Email"
                       />
                     </div>
-                    <div class="col-sm-6">
-                      <input
-                        class="form-control form-control-user"
-                        type="password #RepeatPasswordInput"
-                        id="RepeatPasswordInput"
-                        placeholder="Repeat Password"
-                        name="password_repeat"
-                      />
+                    <div class="form-group row">
+                      <div class="col-sm-6 mb-3 mb-sm-0">
+                        <input
+                          class="form-control form-control-user"
+                          type="password"
+                          id="PasswordInput"
+                          placeholder="Password"
+                          name="password"
+                          [(ngModel)]="Password"
+                        />
+                      </div>
+                      <div class="col-sm-6">
+                        <input
+                          class="form-control form-control-user"
+                          type="password #RepeatPasswordInput"
+                          id="RepeatPasswordInput"
+                          placeholder="Repeat Password"
+                          name="password_repeat"
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <button
-                    class="btn btn-primary btn-block text-white btn-user"
-                    type="submit" (click)="onSignUp(firstName,lastName,Email,Password)"
-                  >
-                    Register Account
-                  </button>
-                </form>
+                    <div class="text-center">
+                      <button
+                        class="mdc-button mdc-button--raised m-2"
+                        (click)="onSignUp(firstName, lastName, Email, Password)"
+                      >
+                        <span class="mdc-button__label">Register Account</span>
+                      </button>
+                    </div>
+                  </form>
 
-                <div class="text-center">
-                  <a class="small" href="/login.html" [routerLink]="['/']"
-                    >Already have an account? Login!</a
-                  >
+                  <div class="text-center">
+                    <a class="small text-white display-4" href="/login.html" [routerLink]="['/login']"
+                      >Already have an account? Login!</a
+                    >
+                  </div>
                 </div>
               </div>
             </div>
@@ -85,5 +88,4 @@
       </div>
     </div>
   </div>
-</div>
 </div>

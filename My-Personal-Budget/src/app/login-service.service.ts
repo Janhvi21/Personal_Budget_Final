@@ -75,7 +75,6 @@ export class LoginServiceService {
     });
   }
   logout() {
-    alert('i am in logout')
     this.firebaseAuth.signOut();
     this.router.navigate(['/login']);
   }

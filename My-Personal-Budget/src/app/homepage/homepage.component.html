@@ -1,20 +1,55 @@
 <div class="homepage">
-  <div class="container text-center">
-    <h1 class="mb-1">Personal Budget</h1>
-    <h3 class="mb-5"><em>A Personal Budget Management App</em></h3>
-    <a
-      class="btn btn-primary btn-xl js-scroll-trigger"
-      role="button" id="loginBtn"
-      href="#about"
-      style="margin: 5px" [routerLink]="['/login']"
-      >Login</a
-    ><a
-      class="btn btn-primary btn-xl js-scroll-trigger"
-      role="button"id="SignUpBtn"
-      href="#about"
-      style="margin: 5px" [routerLink]="['/signup']"
-      >Sign Up</a
-    >
-    <div class="overlay"></div>
+  <div class="container" style="height: 100%">
+    <div class="row justify-content-center">
+      <div class="card shadow-lg o-hidden border-0 my-5">
+        <div class="card-body p-0">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="p-5">
+                <div class="text-center">
+                  <h1 class="mb-1 title">Personal Budget</h1>
+                </div>
+                <br />
+                <br />
+                <div class="text-center">
+                  <button
+                    class="mdc-button mdc-button--raised m-2"
+                    id="loginBtn"
+                    [routerLink]="['/login']"
+                  >
+                    <span class="mdc-button__label">Login</span>
+                  </button>
+                  <button
+                    class="mdc-button mdc-button--raised m-2"
+                    id="SignUpBtn"
+                    [routerLink]="['/signup']"
+                  >
+                    <span class="mdc-button__label">Sign Up</span>
+                  </button>
+                </div>
+                <!-- <a
+                  class="btn btn-primary btn-xl js-scroll-trigger"
+                  role="button"
+                  id="loginBtn"
+                  href="#about"
+                  style="margin: 5px"
+                  [routerLink]="['/login']"
+                  >Login</a
+                ><a
+                  class="btn btn-primary btn-xl js-scroll-trigger"
+                  role="button"
+                  id="SignUpBtn"
+                  href="#about"
+                  style="margin: 5px"
+                  [routerLink]="['/signup']"
+                  >Sign Up</a
+                >-->
+                <div class="overlay"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

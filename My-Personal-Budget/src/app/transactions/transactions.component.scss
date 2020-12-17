@@ -1,0 +1,26 @@
+.dashboard {
+  background-image: url('../assets/img/back_red.png');
+  height: 100%;
+}
+
+.box {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  height: 100%
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.card-header {
+  background-color: rgba(255, 255, 255, 0) !important;
+  border-bottom: 2px solid white !important;
+}

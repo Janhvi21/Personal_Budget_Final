@@ -1,5 +1,5 @@
-<div id="content-wrapper">
-  <div id="content">
+<div id="content-wrapper" class="dashboard">
+  <div class="box" id="content" style="height: 100%">
     <div class="container-fluid">
       <div class="d-sm-flex justify-content-between align-items-center mb-4">
         <h1 class="text-dark text-bold mb-0">Transactions</h1>
@@ -92,7 +92,14 @@
           </div>
         </div>
       </div>
-      <div class="row" *ngIf="!showform">
+      <div
+        class="row"
+        *ngIf="
+          !showform &&
+          dataServices.transactions &&
+          dataServices.transactions.length > 0
+        "
+      >
         <div class="col-md-12">
           <div class="card shadow mb-4 m-2">
             <div class="card-body">
@@ -119,7 +126,7 @@
                           class="add"
                           title="Delete"
                           data-toggle="tooltip"
-                          (click)="OnDelete(i, row.Category,row.Spent)"
+                          (click)="OnDelete(i, row.Category, row.Spent)"
                           ><i class="fa fa-trash"></i
                         ></a>
                       </td>
@@ -130,6 +137,15 @@
             </div>
           </div>
         </div>
+      </div>
+      <div
+        class="alert alert-info"
+        *ngIf="
+          !dataServices.transactions ||
+          (dataServices.transactions && dataServices.transactions.length == 0)
+        "
+      >
+        <strong>No Transactions</strong>
       </div>
       <div class="m-4" style="text-align: right">
         <button

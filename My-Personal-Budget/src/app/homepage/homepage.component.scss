@@ -1,13 +1,58 @@
-.homepage{
-  background-image:url('../assets/bg-masthead.jpg');
-  height: 100%;
+.homepage {
+  background-image: url('../assets/img/back_red.png');
+ height: 100%;
 }
-.centered{
+
+.box {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  height: 100%
+}
+.card {
+  background-color: rgba(255, 255, 255, 0.5) !important;
+  /*margin-right: 20%;
+  margin-left: 20%;
+  padding-top: 10%;
+  //margin-top: 10%;
+  padding-bottom: 10%;*/
+}
+.box2 {
+  background: rgba(145, 191, 242, 0.00);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(2.5px);
+  -webkit-backdrop-filter: blur(2.5px);
+  border-radius: 10px;
+  margin-right: 20%;
+  margin-left: 20%;
+  padding-top: 10%;
+  margin-top: 10%;
+  padding-bottom: 10%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.title{
+  font-size: 410%;
+    color: white;
+    font-weight: 600;
+    font-family: cursive;
+}
+.centered {
   width: auto;
-    position: fixed;
-    top: 40%;
-    left: 50%;
+  position: fixed;
+  top: 40%;
+  left: 50%;
 }
-.container{
-  padding:250px 110px;
+
+.container {
+  padding: 250px 110px;
+}
+
+@supports ((-webkit-backdrop-filter: blur(2em)) or (backdrop-filter: blur(2em))) {
+  .backdrop-blur {
+    background-color: rgba(255, 255, 255, .5);
+    -webkit-backdrop-filter: blur(2em);
+    backdrop-filter: blur(2em);
+  }
 }
