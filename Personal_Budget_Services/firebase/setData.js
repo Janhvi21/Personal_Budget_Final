@@ -48,14 +48,14 @@ module.exports = {
         });
     },
     insertCategory: function (req, callback) {
-        var userId = req.body.uid.uid;
-        var budget = firebase.database().ref("users/" + userId + "/" + req.query.year + "/" + req.query.month + "/Budget");
+        var userId = req.user.uid;
+        var budget = firebase.database().ref("users/" + userId + "/" + req.body.params.year + "/" +req.body.params.month + "/Budget");
         budget.update({
-            [req.query.category]: Number(req.query.Amount)
+            [req.body.params.category]: Number(req.body.params.Amount)
         });
-        var expense = firebase.database().ref("users/" + userId + "/" + req.query.year + "/" + req.query.month + "/Expense");
+        var expense = firebase.database().ref("users/" + userId + "/" + req.body.params.year + "/" + req.body.params.month + "/Expense");
         expense.update({
-            [req.query.category]: 0
+            [req.body.params.category]: 0
         });
         callback(null, {
             "statusCode": 200,
@@ -63,10 +63,10 @@ module.exports = {
         })
     },
     deleteCategory: function (req, callback) {
-        var userId = req.body.uid.uid;
-        var budget = firebase.database().ref("users/" + userId + "/" + req.query.year + "/" + req.query.month + "/Budget/" + req.query.key);
+        var userId = req.user.uid;
+        var budget = firebase.database().ref("users/" + userId + "/" + req.body.params.year + "/" + req.body.params.month + "/Budget/" + req.body.params.key);
         budget.remove();
-        var expense = firebase.database().ref("users/" + userId + "/" + req.query.year + "/" + req.query.month + "/Expense/" + req.query.key);
+        var expense = firebase.database().ref("users/" + userId + "/" + req.body.params.year + "/" + req.body.params.month + "/Expense/" + req.body.params.key);
         expense.remove();
         callback(null, {
             "statusCode": 200,
@@ -74,22 +74,22 @@ module.exports = {
         })
     },
     deleteTransactions: function (req, callback) {
-        var userId = req.body.uid.uid;
-        var expense = firebase.database().ref("users/" + userId + "/" + req.query.year + "/" + req.query.month + "/Transactions/" + req.query.id);
+        var userId = req.user.uid;
+        var expense = firebase.database().ref("users/" + userId + "/" + req.body.params.year + "/" + req.body.params.month + "/Transactions/" + req.body.params.id);
         expense.remove();
-        firebase.database().ref('/users/' + userId + "/" + req.query.year + "/" + req.query.month + "/TotalExpense").once('value').then((snapshot) => {
+        firebase.database().ref('/users/' + userId + "/" + req.body.params.year + "/" + req.body.params.month + "/TotalExpense").once('value').then((snapshot) => {
             let exp = 0;
             exp = snapshot.val();
 
-            exp = exp - Number(req.query.spent);
-            firebase.database().ref('/users/' + userId + "/" + req.query.year + "/" + req.query.month + "/TotalExpense").set(exp);
+            exp = exp - Number(req.body.params.spent);
+            firebase.database().ref('/users/' + userId + "/" + req.body.params.year + "/" + req.body.params.month + "/TotalExpense").set(exp);
 
         });
-        firebase.database().ref('/users/' + userId + "/" + req.query.year + "/" + req.query.month + "/Expense/" + req.query.category).once('value').then((snapshot) => {
+        firebase.database().ref('/users/' + userId + "/" + req.body.params.year + "/" + req.body.params.month + "/Expense/" + req.body.params.category).once('value').then((snapshot) => {
             let exp = 0;
             exp = snapshot.val();
-            exp = exp - Number(req.query.spent);
-            firebase.database().ref('/users/' + userId + "/" + req.query.year + "/" + req.query.month + "/Expense/" + req.query.category).set(exp);
+            exp = exp - Number(req.body.params.spent);
+            firebase.database().ref('/users/' + userId + "/" + req.body.params.year + "/" + req.body.params.month + "/Expense/" + req.body.params.category).set(exp);
 
         });
         callback(null, {
@@ -98,32 +98,32 @@ module.exports = {
         })
     },
     insertTransaction: function (req, callback) {
-        var userId = req.body.uid.uid;
+        var userId =req.user.uid;
         let count = 0;
-        firebase.database().ref('/users/' + userId + "/" + req.query.year + "/" + req.query.month + "/Transactions/").once('value').then((snapshot) => {
+        firebase.database().ref('/users/' + userId + "/" + req.body.params.year + "/" + req.body.params.month + "/Transactions/").once('value').then((snapshot) => {
 
             for (let row in snapshot.val()) {
                 count++;
             }
-            firebase.database().ref("users/" + userId + "/" + req.query.year + "/" + req.query.month + "/Transactions/" + count).set({
-                Category: req.query.Category,
-                Date: req.query.Date,
-                Details: req.query.Details,
-                Spent: Number(req.query.Spent)
+            firebase.database().ref("users/" + userId + "/" + req.body.params.year + "/" + req.body.params.month + "/Transactions/" + count).set({
+                Category: req.body.params.Category,
+                Date: req.body.params.Date,
+                Details: req.body.params.Details,
+                Spent: Number(req.body.params.Spent)
             });
         });
-        firebase.database().ref('/users/' + userId + "/" + req.query.year + "/" + req.query.month + "/TotalExpense").once('value').then((snapshot) => {
+        firebase.database().ref('/users/' + userId + "/" + req.body.params.year + "/" + req.body.params.month + "/TotalExpense").once('value').then((snapshot) => {
             let exp = 0;
             exp = snapshot.val();
-            exp = exp + Number(req.query.Spent);
-            firebase.database().ref('/users/' + userId + "/" + req.query.year + "/" + req.query.month + "/TotalExpense").set(exp);
+            exp = exp + Number(req.body.params.Spent);
+            firebase.database().ref('/users/' + userId + "/" + req.body.params.year + "/" + req.body.params.month + "/TotalExpense").set(exp);
 
         });
-        firebase.database().ref('/users/' + userId + "/" + req.query.year + "/" + req.query.month + "/Expense/" + req.query.Category).once('value').then((snapshot) => {
+        firebase.database().ref('/users/' + userId + "/" + req.body.params.year + "/" + req.body.params.month + "/Expense/" + req.body.params.Category).once('value').then((snapshot) => {
             let exp = 0;
             exp = snapshot.val();
-            exp = exp + Number(req.query.Spent);
-            firebase.database().ref('/users/' + userId + "/" + req.query.year + "/" + req.query.month + "/Expense/" + req.query.Category).set(exp);
+            exp = exp + Number(req.body.params.Spent);
+            firebase.database().ref('/users/' + userId + "/" + req.body.params.year + "/" + req.body.params.month + "/Expense/" + req.body.params.Category).set(exp);
 
         });
         callback(null, {
@@ -132,18 +132,18 @@ module.exports = {
         })
     },
     addMonthtoDB: function (req, callback) {
-        var userId = req.body.uid.uid;
+        var userId = req.user.uid;
         let budget = {};
         let totalBudget = 0;
         let expense = {};
-        firebase.database().ref('/users/' + userId + '/' + req.query.currYear + '/' + req.query.currMonth).once('value').then((snapshot) => {
+        firebase.database().ref('/users/' + userId + '/' + req.body.params.currYear + '/' + req.body.params.currMonth).once('value').then((snapshot) => {
             budget = snapshot.val().Budget;
             totalBudget = snapshot.val().TotalBudget;
             expense = snapshot.val().Expense;
             for (let con in expense) {
                 expense.con = 0;
             }
-            firebase.database().ref("users/" + userId + '/' + req.query.year + '/' + req.query.month).update({
+            firebase.database().ref("users/" + userId + '/' + req.body.params.year + '/' + req.body.params.month).update({
                 Budget: budget,
                 Expense: expense,
                 TotalBudget: totalBudget,

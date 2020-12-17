@@ -12,8 +12,10 @@
     "custom-env": "^2.0.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-jwt": "^6.0.0",
     "firebase": "^8.2.0",
     "firebase-admin": "^9.4.1",
+    "jsonwebtoken": "^8.5.1",
     "mocha": "^8.2.1",
     "mockgoose": "^8.0.4",
     "supertest": "^6.0.1"

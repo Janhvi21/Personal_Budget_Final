@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Data } from '@angular/router';
+import { Data, Router } from '@angular/router';
 import 'rxjs';
 import { AppModule } from './app.module';
 import { stringify } from '@angular/compiler/src/util';
+declare var $: any;
 import { environment } from '../environments/environment';
 
 export class Element {
@@ -55,7 +56,7 @@ export class DataService {
   public result;
   public setYear = '';
   public setMonth = '';
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, public router: Router) {}
 
   /*getData() {
     this.data = [];
@@ -88,12 +89,16 @@ export class DataService {
     this.UserData = [];
     this.transactions = [];
     this.dataSource.datasets[0].data = [];
-    const params = {
-      token: localStorage.getItem('TOKEN'),
-    };
+    let token = localStorage.getItem('TOKEN');
+    let uid = localStorage.getItem('uid');
     const promise = new Promise<void>((resolve, reject) => {
       this.http
-        .get(environment.URL + ':3000/getAllData', { params })
+        .get(environment.URL + ':3000/getAllData', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            uid: uid,
+          },
+        })
         .toPromise()
         .then((res: any) => {
           this.months = [];
@@ -121,16 +126,23 @@ export class DataService {
           }
           this.transactions = res[this.setYear][this.setMonth]['Transactions'];
           this.UserData = res[this.setYear][this.setMonth]['Budget'];
-          console.log(res['username']);
           this.userName = res['username'];
           resolve();
+        })
+        .catch((error: any) => {
+          resolve();
+          if (error.status == 401 || error.statusText == 'Unauthorized') {
+            this.router.navigate(['/login']);
+            this.removeBackdrop();
+          }
         });
     });
     return promise;
   }
   insertCategory(category: string, amount: string) {
+    let token = localStorage.getItem('TOKEN');
+    let uid = localStorage.getItem('uid');
     const params = {
-      token: localStorage.getItem('TOKEN'),
       category: category,
       Amount: amount,
       month: this.setMonth,
@@ -138,17 +150,34 @@ export class DataService {
     };
     const promise = new Promise<void>((resolve, reject) => {
       this.http
-        .get(environment.URL + ':3000/insertCategory', { params })
+        .post(
+          environment.URL + ':3000/insertCategory',
+          { params },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              uid: uid,
+            },
+          }
+        )
         .toPromise()
         .then((res: any) => {
           resolve();
+        })
+        .catch((error: any) => {
+          resolve();
+          if (error.status == 401 || error.statusText == 'Unauthorized') {
+            this.router.navigate(['/login']);
+            this.removeBackdrop();
+          }
         });
     });
     return promise;
   }
   deleteCategory(rows) {
+    let token = localStorage.getItem('TOKEN');
+    let uid = localStorage.getItem('uid');
     const params = {
-      token: localStorage.getItem('TOKEN'),
       key: rows.key,
       value: rows.value,
       month: this.setMonth,
@@ -156,10 +185,26 @@ export class DataService {
     };
     const promise = new Promise<void>((resolve, reject) => {
       this.http
-        .get(environment.URL + ':3000/deleteCategory', { params })
+        .post(
+          environment.URL + ':3000/deleteCategory',
+          { params },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              uid: uid,
+            },
+          }
+        )
         .toPromise()
         .then((res: any) => {
           resolve();
+        })
+        .catch((error: any) => {
+          resolve();
+          if (error.status == 401 || error.statusText == 'Unauthorized') {
+            this.router.navigate(['/login']);
+            this.removeBackdrop();
+          }
         });
     });
     return promise;
@@ -170,8 +215,9 @@ export class DataService {
     detail: string,
     date: string
   ) {
+    let token = localStorage.getItem('TOKEN');
+    let uid = localStorage.getItem('uid');
     const params = {
-      token: localStorage.getItem('TOKEN'),
       Category: category,
       Date: date,
       Details: detail,
@@ -181,17 +227,34 @@ export class DataService {
     };
     const promise = new Promise<void>((resolve, reject) => {
       this.http
-        .get(environment.URL + ':3000/insertTransaction', { params })
+        .post(
+          environment.URL + ':3000/insertTransaction',
+          { params },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              uid: uid,
+            },
+          }
+        )
         .toPromise()
         .then((res: any) => {
           resolve();
+        })
+        .catch((error: any) => {
+          resolve();
+          if (error.status == 401 || error.statusText == 'Unauthorized') {
+            this.router.navigate(['/login']);
+            this.removeBackdrop();
+          }
         });
     });
     return promise;
   }
   deleteTransactions(id: string, category: string, spent: string) {
+    let token = localStorage.getItem('TOKEN');
+    let uid = localStorage.getItem('uid');
     const params = {
-      token: localStorage.getItem('TOKEN'),
       id: id,
       category: category,
       spent: spent,
@@ -200,17 +263,34 @@ export class DataService {
     };
     const promise = new Promise<void>((resolve, reject) => {
       this.http
-        .get(environment.URL + ':3000/deleteTransactions', { params })
+        .post(
+          environment.URL + ':3000/deleteTransactions',
+          { params },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              uid: uid,
+            },
+          }
+        )
         .toPromise()
         .then((res: any) => {
           resolve();
+        })
+        .catch((error: any) => {
+          resolve();
+          if (error.status == 401 || error.statusText == 'Unauthorized') {
+            this.router.navigate(['/login']);
+            this.removeBackdrop();
+          }
         });
     });
     return promise;
   }
   addMonthToDB(month: string, year: string) {
+    let token = localStorage.getItem('TOKEN');
+    let uid = localStorage.getItem('uid');
     const params = {
-      token: localStorage.getItem('TOKEN'),
       month: month,
       year: year,
       currMonth: this.setMonth,
@@ -218,13 +298,34 @@ export class DataService {
     };
     const promise = new Promise<void>((resolve, reject) => {
       this.http
-        .get(environment.URL + ':3000/addMonthtoDB', { params })
+        .post(
+          environment.URL + ':3000/addMonthtoDB',
+          { params },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              uid: uid,
+            },
+          }
+        )
         .toPromise()
         .then((res: any) => {
           resolve();
+        })
+        .catch((error: any) => {
+          console.log(error);
+          resolve();
+          if (error.status == 401 || error.statusText == 'Unauthorized') {
+            this.router.navigate(['/login']);
+            this.removeBackdrop();
+          }
         });
     });
 
     return promise;
+  }
+  removeBackdrop() {
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
   }
 }

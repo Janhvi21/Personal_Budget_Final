@@ -1,8 +1,8 @@
-<div id="content-wrapper" class="dashboard">
-  <div class="box" id="content" style="height: 100%">
+<div id="content-wrapper" class="content">
+  <div class="" id="content" style="height: 100%">
     <div class="container-fluid">
       <div class="d-sm-flex justify-content-between align-items-center mb-4">
-        <h1 class="text-dark text-bold mb-0">Transactions</h1>
+        <h3 class="title py-2">Transactions</h3>
       </div>
 
       <div class="row" *ngIf="showform">
@@ -104,7 +104,7 @@
           <div class="card shadow mb-4 m-2">
             <div class="card-body">
               <div class="align-items-center no-gutters">
-                <table class="table table-hover">
+                <table class="table table-hover" style="word-break: break-all;">
                   <thead>
                     <tr>
                       <th *ngFor="let item of headers">{{ item }}</th>

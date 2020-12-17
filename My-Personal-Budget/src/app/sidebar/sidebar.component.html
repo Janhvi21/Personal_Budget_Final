@@ -1,43 +1,90 @@
-<nav class="navbar navbar-expand-md colorNav navbar-dark">
-  <!-- Brand/logo -->
-  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-    <a class="navbar-brand" href="#">Personal Budget</a>
+<div class="background">
+  <div class="box">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark colorNav">
+      <a class="navbar-brand title">Personal Budget</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link links" (click)="onChangeMenu('Dashboard')"
+              >Dashboard <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link links" (click)="onChangeMenu('Transactions')"
+              >Transactions</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link links" (click)="OnLogout()">Log Out</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link text-white links"
+              >User : {{ dataService.userName }}</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div style="width: -webkit-fill-available">
+      <app-dashboard *ngIf="selectedMenu == 'Dashboard'"></app-dashboard>
 
-    <!-- Links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a
-          class="nav-link text-white"
-          (click)="onChangeMenu('Dashboard')"
-          style="cursor: pointer"
-          >Dashboard</a
-        >
-      </li>
-      <li class="nav-item">
-        <a
-          class="nav-link text-white"
-          (click)="onChangeMenu('Transactions')"
-          style="cursor: pointer"
-          >Transactions</a
-        >
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-white" (click)="OnLogout()" style="cursor: pointer"
-          >Log Out</a
-        >
-      </li>
-    </ul>
+      <app-transactions
+        *ngIf="selectedMenu == 'Transactions'"
+      ></app-transactions>
+    </div>
+    <div style="content-visibility: hidden">
+      <button
+        type="button"
+        id="refresh"
+        class="btn btn-secondary btn-lg"
+        data-toggle="modal"
+        data-target="#timeoutModal"
+      >
+        Refresh Token
+      </button>
+    </div>
+    <div class="modal" id="timeoutModal">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Your Session is about to Expire</h4>
+            <button
+              type="button"
+              id="closeRefreshModal"
+              class="close"
+              (click)="callTimer()"
+              data-dismiss="modal"
+              aria-hidden="true"
+            >
+              ×
+            </button>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-default"
+              (click)="onRefreshTimer()"
+              data-dismiss="modal"
+            >
+              Refresh Token
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-            <a class="nav-link text-white">User : {{dataService.userName}}</a>
-        </li>
-    </ul>
-</div>
-</nav>
-<div style="width: -webkit-fill-available;height: 100%;">
-  <app-dashboard *ngIf="selectedMenu == 'Dashboard'"></app-dashboard>
-
-  <app-transactions *ngIf="selectedMenu == 'Transactions'"></app-transactions>
 </div>

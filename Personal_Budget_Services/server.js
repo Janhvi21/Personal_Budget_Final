@@ -4,6 +4,10 @@ const cors = require('cors');
 const setFirebase = require("./firebase/setData");
 const getFirebase = require("./firebase/getData");
 const compression = require('compression');
+const jwt = require('jsonwebtoken');
+
+const exjwt = require('express-jwt');
+
 
 const app = express();
 app.use(compression());
@@ -13,7 +17,16 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Headers', 'Content-type,Authorization');
+  next();
+});
+const secretKey = 'My super secret key';
 
+const jwtMW = exjwt({
+  secret: secretKey,
+  algorithms: ['HS256']
+});
 
 
 const admin = require('./firebase-admin/admin');
@@ -33,7 +46,22 @@ app.get("/allUsers", function (req, res) {
     res.send(data);
   })
 });
-
+app.post("/createToken/", function (req, res) {
+  let token = jwt.sign({
+    uid: req.body.uid,
+    username: req.body.username
+  }, secretKey, {
+    expiresIn: "60s"
+  });
+  res.send({
+    success: true,
+    err: null,
+    token: token
+  });
+})
+app.get("/verifyToken/", jwtMW, function (req, res) {
+  res.send(req.user);
+})
 app.post("/createNewUser/", function (req, res) {
   let token = "";
   admin.auth().createUser({
@@ -43,60 +71,46 @@ app.post("/createNewUser/", function (req, res) {
       displayName: req.body.username,
       disabled: false,
     }).then((userRecord) => {
-      admin.auth().createCustomToken(userRecord.uid, {
-          expiresAt: Date.now() + (1000 * 60)
-        })
-        .then((customToken) => {
-
-          token = customToken;
-          setFirebase.createNewUser(userRecord);
-          res.send({
-            "tokenID": token
-          });
-        })
-        .catch((error) => {
-          console.log("Token Error:", error);
-        })
+      setFirebase.createNewUser(userRecord);
+      res.send({
+        success: true,
+        message: 'User Created SuccessFully'
+      })
     })
     .catch((error) => {
       console.log('Error creating new user:', error);
     })
 
 })
-app.get("/verifyUser/", verifyToken, function (req, res) {
-  res.send({
-    "message": "OK"
-  });
-});
-app.get("/getAllData/", verifyToken, function (req, res) {
-  getFirebase.getUserInfo(req.body.uid.user_id, function (err, data) {
+app.get("/getAllData/", jwtMW, function (req, res) {
+  getFirebase.getUserInfo(req.headers.uid, function (err, data) {
     res.send(data);
   })
 })
-app.get("/insertCategory/", verifyToken, function (req, res) {
+app.post("/insertCategory/", jwtMW, function (req, res) {
   setFirebase.insertCategory(req, function (err, data) {
     res.send(data);
   })
 })
 
-app.get("/deleteCategory/", verifyToken, function (req, res) {
+app.post("/deleteCategory/", jwtMW, function (req, res) {
   setFirebase.deleteCategory(req, function (err, data) {
     res.send(data);
   })
 })
 
-app.get("/insertTransaction/", verifyToken, function (req, res) {
+app.post("/insertTransaction/", jwtMW, function (req, res) {
   setFirebase.insertTransaction(req, function (err, data) {
     res.send(data);
   })
 })
 
-app.get("/deleteTransactions/", verifyToken, function (req, res) {
+app.post("/deleteTransactions/", jwtMW, function (req, res) {
   setFirebase.deleteTransactions(req, function (err, data) {
     res.send(data);
   })
 })
-app.get("/addMonthtoDB/", verifyToken, function (req, res) {
+app.post("/addMonthtoDB/", jwtMW, function (req, res) {
   setFirebase.addMonthtoDB(req, function (err, data) {
     res.send(data);
   })
@@ -116,3 +130,16 @@ async function verifyToken(req, res, next) {
     return res.status(401).send("You are not authorized | error! " + e);
   }
 }
+
+app.use(function (err, req, res, next) {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401).send({
+      success: false,
+      officialError: err,
+      err: 'Username or password is incorrect 2'
+    });
+
+  } else {
+    next(err);
+  }
+});
