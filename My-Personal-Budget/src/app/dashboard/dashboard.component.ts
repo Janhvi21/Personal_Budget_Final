@@ -36,6 +36,8 @@ export class DashboardComponent implements AfterViewInit, OnInit {
   public addyearSelected = '2020';
   public years;
   public date = new Date();
+  public myBarChart;
+  public myPieChart;
 
   constructor(
     public dataService: DataService,
@@ -90,12 +92,13 @@ export class DashboardComponent implements AfterViewInit, OnInit {
     this.dataService.dataSource.datasets[0].data = [];
     this.dataService.dataSource.labels = [];
     this.dataService.spentData = [];
+    this.myBarChart.destroy();
+    this.myPieChart.destroy();
     this.ngAfterViewInit();
   }
   createBarChart(): void {
-    let myBarChart;
-    if (myBarChart != null) {
-      myBarChart.destroy();
+    if (this.myBarChart != null) {
+      this.myBarChart.destroy();
     }
     const ctx = document.getElementById('barChart');
 
@@ -116,7 +119,7 @@ export class DashboardComponent implements AfterViewInit, OnInit {
       ],
     };
 
-    myBarChart = new Chart(ctx, {
+    this.myBarChart = new Chart(ctx, {
       type: 'bar',
       data: barData,
       options: {
@@ -136,7 +139,7 @@ export class DashboardComponent implements AfterViewInit, OnInit {
   // Using Chart.js
   createChart(): void {
     const ctx = document.getElementById('myChart');
-    const myPieChart = new Chart(ctx, {
+    this.myPieChart = new Chart(ctx, {
       type: 'pie',
       data: this.dataService.dataSource,
     });
