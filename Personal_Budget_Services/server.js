@@ -78,7 +78,11 @@ app.post("/createNewUser/", function (req, res) {
       })
     })
     .catch((error) => {
-      console.log('Error creating new user:', error);
+      res.send({
+        success: false,
+        statusCode: 500,
+        message: error == null || isEmptyObject(error) ? "Some error at the server" : error,
+      })
     })
 
 })
@@ -143,3 +147,7 @@ app.use(function (err, req, res, next) {
     next(err);
   }
 });
+
+function isEmptyObject(obj) {
+  return !Object.keys(obj).length;
+}
